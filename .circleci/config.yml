@@ -2,9 +2,9 @@ version: 2
 jobs:
  build:
   docker:
-   -image: cimg/node:lts
+   - image: cimg/node:lts
   steps:
-   -checkout
+   - checkout
    - run: echo "A first hello"
    - run: yarn install
    - run: yarn test
