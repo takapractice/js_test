@@ -1,18 +1,30 @@
-version: 2.1
+version: '2.1'
+orbs:
+  slack: circleci/slack@4.0
 jobs:
- build:
-  docker:
-   - image: cimg/node:lts
+  notify:
+    docker:
+      - image: cimg/node:lts
     steps:
       - slack/notify:
-          color: '#42e2f4'
-          mentions: 'USERID1,USERID2,'
-          message: This is a custom message notification
-          webhook: webhook
-orbs:
-  slack: circleci/slack@4.0.0
-version: 2.1
+          custom: |
+            {
+              "blocks": [
+                {
+                  "type": "section",
+                  "fields": [
+                    {
+                      "type": "plain_text",
+                      "text": "*This is a text notification*",
+                      "emoji": true
+                    }
+                  ]
+                }
+              ]
+            }
+          event: always
 workflows:
-  your-workflow:
+  send-notification:
     jobs:
-      - build
+      - notify:
+          context: slack-secrets
