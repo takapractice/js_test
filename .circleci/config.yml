@@ -1,4 +1,7 @@
 version: 2
+orbs:
+ slack: circleci/slack@4.0
+
 jobs:
  build:
   docker:
@@ -8,3 +11,7 @@ jobs:
    - run: echo "Pull Request"
    - run: yarn install
    - run: yarn test
+   - slack/status:
+      success_message: 'OK'
+      failure_message: 'NG'
+      webhook: '${SLACK_WEBHOOK}'
