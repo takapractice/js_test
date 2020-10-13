@@ -1,5 +1,6 @@
-version: 2.1
-
+version: '2.1'
+orbs:
+  slack: circleci/slack@4.0.0
 jobs:
  build:
   docker:
@@ -14,10 +15,3 @@ jobs:
           mentions: 'USERID1,USERID2,'
           message: This is a custom message notification
           webhook: webhook
-orbs:
-  slack: circleci/slack@4.0.0
-version: 2.1
-workflows:
-  your-workflow:
-    jobs:
-      - build
